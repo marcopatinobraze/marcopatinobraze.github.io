@@ -57,6 +57,17 @@
     <h3>Your Personalized Feed</h3>
     <div id="feed"></div>
 </nav>
+
+<!-- This is adding the test button for the priority testing -->
+
+<nav>
+  <h3>Prioritized Cards</h3>
+  <div id="prioritized_cards"></div>
+</nav>
+<button id="prioritized_cards_toggle" type="button">Show prioritized cards</button>
+
+<!-- This ends the test button for priority testing -->
+
 <button id="toggle" type="button">Toggle Cards Feed</button>
 <button id="hide" type="button">Hide Cards Feed</button>
 <button id="show" type="button">Show Cards Feed</button>
@@ -77,6 +88,24 @@
    show.onclick = function(){
       braze.showContentCards(feed);
    }
+
+   // I'm adding some code to filter by feed type. The idea is to test with sorting methods. This test will be with the KVP 'low_priority'
+   function showCardsByFeedType(priority) {
+  braze.showContentCards(null, function(cards) {
+    return cards.filter(function(card) {
+      return card.extras["low_priority"] === priority;
+    });
+  })
+}
+
+// This is adding the actual button for the priority testing
+
+document.getElementById("priority_cards").onclick = function() {
+  braze.showContentCards(prioritized_cards);
+};
+
+// This is the end of the actual button for the priority testing. 
+
 </script>
 <h1>What is your favorite place to travel?!</h1>
 <form name="travel" onsubmit="identify(event)">
