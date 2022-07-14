@@ -92,18 +92,18 @@
    }
 
    // I'm adding some code to filter by feed type. The idea is to test with sorting methods. This test will be with the KVP 'low_priority'
-   function showCardsByFeedType(priority) {
+   function showCardsByFeedType(prioritized_feed) {
   braze.showContentCards(null, function(cards) {
     return cards.filter(function(card) {
-      return card.extras["low_priority"] === priority;
+      return card.extras["low_priority"] === prioritized_feed;
     });
   })
 }
 
 // This is adding the actual button for the priority testing
 
-document.getElementById("priority_cards").onclick = function() {
-  braze.showContentCards(prioritized_cards);
+document.getElementById("prioritized_cards").onclick = function() {
+  showCardsByFeedType("prioritized_feed");
 };
 
 // This is the end of the actual button for the priority testing. 
