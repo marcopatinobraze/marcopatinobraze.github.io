@@ -61,8 +61,8 @@
 <!-- This is adding the test button for the priority testing -->
 
 <nav>
-  <h3>Prioritized Cards</h3>
-  <div id="prioritized_cards"></div>
+  <h3>Prioritized Feed</h3>
+  <div id="prioritized_feed"></div>
 </nav>
 <button id="prioritized_cards_toggle" type="button">Show prioritized cards</button>
 
@@ -77,7 +77,7 @@
    const show = document.getElementById("show");
    const feed = document.getElementById("feed");
    // This is the const value for the prioritized_cards button
-   const priority = document.getElementById("prioritized_cards");
+   const prioritized_feed = document.getElementById("prioritized_feed");
 
    toggle.onclick = function(){
       braze.toggleContentCards(feed);
