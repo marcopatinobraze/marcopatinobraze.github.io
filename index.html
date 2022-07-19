@@ -64,7 +64,9 @@
   <h3>Prioritized Feed</h3>
   <div id="prioritized_feed"></div>
 </nav>
-<button id="prioritized_cards_toggle" type="button">Show prioritized cards</button>
+<button id="low_priority_cards_toggle" type="button">Show low priority cards</button>
+<button id="medium_priority_cards_toggle" type="button">Show medium priority cards</button>
+<button id="high_priority_cards_toggle" type="button">Show high priority cards</button>
 
 <!-- This ends the test button for priority testing -->
 
@@ -77,7 +79,10 @@
    const show = document.getElementById("show");
    const feed = document.getElementById("feed");
    // This is the const value for the prioritized_cards button
-   const prioritized_cards_toggle = document.getElementById("prioritized_cards_toggle");
+   const low_priority_cards_toggle = document.getElementById("low_priority_cards_toggle");
+   const medium_priority_cards_toggle = document.getElementById("medium_priority_cards_toggle");
+   const high_priority_cards_toggle = document.getElementById("high_priority_cards_toggle");
+
 
    toggle.onclick = function(){
       braze.toggleContentCards(feed);
@@ -99,12 +104,34 @@
     });
   })
 }
+function showCardsByFeedType(medium_priority) {
+  braze.showContentCards(null, function(cards) {
+    return cards.filter(function(card) {
+      return card.extras["priority_level"] === medium_priority;
+    });
+  })
+}
+function showCardsByFeedType(high_priority) {
+  braze.showContentCards(null, function(cards) {
+    return cards.filter(function(card) {
+      return card.extras["priority_level"] === high_priority;
+    });
+  })
+}
+
 
 // This is adding the actual button for the priority testing
 
-document.getElementById("prioritized_cards_toggle").onclick = function() {
+document.getElementById("low_priority_cards_toggle").onclick = function() {
   showCardsByFeedType("low_priority");
 };
+document.getElementById("medium_priority_cards_toggle").onclick = function() {
+  showCardsByFeedType("medium_priority");
+};
+document.getElementById("high_priority_cards_toggle").onclick = function() {
+  showCardsByFeedType("high_priority");
+};
+
 
 // This is the end of the actual button for the priority testing. 
 
