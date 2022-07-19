@@ -100,7 +100,7 @@
    function showCardsByFeedType(low_priority) {
   braze.showContentCards(null, function(cards) {
     return cards.filter(function(card) {
-      return card.extras["priority_level"] === low_priority;
+      return card.extras["priority_level"] === [low_priority, medium_priority, high_priority];
     });
   })
 }
