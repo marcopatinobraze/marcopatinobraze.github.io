@@ -77,7 +77,7 @@
    const show = document.getElementById("show");
    const feed = document.getElementById("feed");
    // This is the const value for the prioritized_cards button
-   const prioritized_feed = document.getElementById("prioritized_feed");
+   const prioritized_feed_toggle = document.getElementById("prioritized_feed_toggle");
 
    toggle.onclick = function(){
       braze.toggleContentCards(feed);
@@ -102,7 +102,7 @@
 
 // This is adding the actual button for the priority testing
 
-document.getElementById("prioritized_feed").onclick = function() {
+document.getElementById("prioritized_feed_toggle").onclick = function() {
   showCardsByFeedType("low_priority");
 };
 
