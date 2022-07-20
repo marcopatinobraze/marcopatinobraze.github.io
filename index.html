@@ -64,7 +64,7 @@
   <h3>Prioritized Feed</h3>
   <div id="prioritized_feed"></div>
 </nav>
-<button id="low_priority_cards_toggle" type="button">Show low priority cards</button>
+<button id="low_priority_cards_toggle" type="button">Show all cards with a priority</button>
 <button id="medium_priority_cards_toggle" type="button">Show medium priority cards</button>
 <button id="high_priority_cards_toggle" type="button">Show high priority cards</button>
 
@@ -123,7 +123,7 @@
 // This is adding the actual button for the priority testing
 
 document.getElementById("low_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("1", "2");
+  showCardsByFeedType("1", "2", "3");
 };
 document.getElementById("medium_priority_cards_toggle").onclick = function() {
   showCardsByFeedType("2");
