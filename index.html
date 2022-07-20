@@ -104,7 +104,17 @@
       // .includes is a true or false check. So if priority_level exists, return true
       return priority_levels.includes(card.extras["priority_level"]);
     });
-    filteredCards.sort((a,b) => a.extras.priority_level < b.extras.priority_level)
+    filteredCards.sort((a,b) => {
+      const priorityA = a.extras.priority_level;
+      const priorityB = b.extras.priority_level;
+      if (priorityA < priorityB) {
+        return -1;
+      }
+      if (priorityA > priorityB) {
+        return 1;
+      }
+      return 0;
+    })
     return filteredCards
   })
 }
