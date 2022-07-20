@@ -111,7 +111,7 @@
 // This is adding the actual button for the priority testing
 
 document.getElementById("low_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("low_priority", "high_priority").sort();
+  showCardsByFeedType.sort("low_priority", "high_priority");
 };
 document.getElementById("medium_priority_cards_toggle").onclick = function() {
   showCardsByFeedType("medium_priority");
