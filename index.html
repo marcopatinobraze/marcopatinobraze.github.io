@@ -123,13 +123,13 @@
 // This is adding the actual button for the priority testing
 
 document.getElementById("low_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("low_priority", "high_priority");
+  showCardsByFeedType("1", "2");
 };
 document.getElementById("medium_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("medium_priority");
+  showCardsByFeedType("2");
 };
 document.getElementById("high_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("high_priority", "medium_priority");
+  showCardsByFeedType("3", "2");
 };
 
 
