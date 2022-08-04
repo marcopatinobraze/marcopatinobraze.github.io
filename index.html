@@ -4,16 +4,14 @@
     <!-- This title is for labeling the title of the site as it appears on the tab of the browser --> 
     <title>Web SDK Testing<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
 
-    <!--Placeholder for Segment Snippet (Added by Paul Yoo. Have not had to deal with this as of 7/13/2022)
+    <!-- Adding the Segment snippet for testing -->
     <script>
-    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
-    // analytics.addSourceMiddleware(SMW1);
-    // analytics.addDestinationMiddleware('integrationA', [DMW1]);
-    analytics.load("bQqLkTIOYk1ufjha3Py2O12lbshZo1zc");
-    analytics.page();
-    }}();
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="l6dTFGVUHBfTBYYDzXEgyoqJyzo0AEVL";;analytics.SNIPPET_VERSION="4.15.3";
+      analytics.load("l6dTFGVUHBfTBYYDzXEgyoqJyzo0AEVL");
+      analytics.page();
+      }}();
     </script>
-    -->
+    
 
     <!-- This code checks if the browser supports service workers. The function is then registering the service worker added in the 
     file service-worker.js -->
@@ -29,8 +27,9 @@
     y.src='https://js.appboycdn.com/web-sdk/4.0/braze.min.js';
     y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
   }(window,document,'script');
-  // initialize the SDK
-  braze.initialize('919cad7b-0c69-43cb-9dd3-b6e99c16c57a', {
+  // initialize the SDK. Temporarily removing API key to Sweeney for Segment testing 919cad7b-0c69-43cb-9dd3-b6e99c16c57a and
+  // adding the key to 01.
+  braze.initialize('b027756c-a394-4a64-8d1a-dbb985145b7a', {
     baseUrl: "sondheim.braze.com",
     enableLogging: true,
     minimumIntervalBetweenTriggerActionsInSeconds: 0
@@ -38,10 +37,12 @@
   // optionally show all in-app messages without custom handling 
   braze.automaticallyShowInAppMessages();
   // optionally set the current user's External ID
+
+  // I am commenting out the .changeUser method to try and be anonymous until I identify myself. 
   /*if (isLoggedIn){
-    braze.changeUser('paulfirstwebexid');
+    braze.changeUser('2813308004');
   }*/
-  braze.changeUser('2813308004');
+  // braze.changeUser('2813308004');
   // if you use Content Cards
   braze.subscribeToContentCardsUpdates(function(cards){
     // cards have been updated
@@ -136,7 +137,7 @@ document.getElementById("high_priority_cards_toggle").onclick = function() {
 // This is the end of the actual button for the priority testing. 
 
 </script>
-<h1>What is your favorite place to travel?!</h1>
+<h1>Test questions for user updates</h1>
 <form name="travel" onsubmit="identify(event)">
      What is your favorite destination?
     <input name="destination" size="81" type="text"/>
@@ -161,11 +162,11 @@ document.getElementById("high_priority_cards_toggle").onclick = function() {
     <input name="Submit Form" type="submit" value="submit"/>
 </form>
 
-    <!--Placeholder for identify and track script -->
+    <!--Placeholder for identify and track script. I also expanded e to event. -->
     <script type="text/javascript">
-      function identify(e){
-        e.preventDefault();
-        var form = e.target;
+      function identify(event){
+        event.preventDefault();
+        var form = event.target;
         var email = form["email"].value;
         var firstname = form["firstname"].value;
         var lastname = form["lastname"].value;
@@ -184,7 +185,7 @@ document.getElementById("high_priority_cards_toggle").onclick = function() {
         };
         alert("The form was submitted");
         braze.changeUser(external_id);
-        braze.logCustomEvent('Form Submitted', {'paulTestKey': true});
+        braze.logCustomEvent('Form Submitted', {'marcoTestKey': true});
         braze.getUser().setFirstName(firstname);
         braze.getUser().setLastName(lastname);
         braze.getUser().setPhoneNumber(number);
