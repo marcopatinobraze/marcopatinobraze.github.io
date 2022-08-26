@@ -1,228 +1,352 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <!-- This title is for labeling the title of the site as it appears on the tab of the browser --> 
-    <title>Web SDK Testing<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <title>Marco Web SDK Test Site v2</title>
+  <style>
 
-    <!-- Adding the Segment snippet for testing -->
-    <script>
-      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="l6dTFGVUHBfTBYYDzXEgyoqJyzo0AEVL";;analytics.SNIPPET_VERSION="4.15.3";
-      analytics.load("l6dTFGVUHBfTBYYDzXEgyoqJyzo0AEVL");
-      analytics.page();
-      }}();
-    </script>
-    
-
-    <!-- This code checks if the browser supports service workers. The function is then registering the service worker added in the 
-    file service-worker.js -->
-    <script>
-    if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
+    body {background-color: powderblue;}
+  .specialButton
+  {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
   }
-    </script>
 
-    <!-- Random test. This is the actual Web SDK as we are referencing the Braze-hosted CDN script which loads the library asynchronously-->
-    <script type="text/javascript">
-  +function(a,p,P,b,y){a.braze={};a.brazeQueue=[];for(var s="BrazeSdkMetadata DeviceProperties Card Card.prototype.dismissCard Card.prototype.removeAllSubscriptions Card.prototype.removeSubscription Card.prototype.subscribeToClickedEvent Card.prototype.subscribeToDismissedEvent Card.fromContentCardsJson Banner CaptionedImage ClassicCard ControlCard ContentCards ContentCards.prototype.getUnviewedCardCount Feed Feed.prototype.getUnreadCardCount ControlMessage InAppMessage InAppMessage.SlideFrom InAppMessage.ClickAction InAppMessage.DismissType InAppMessage.OpenTarget InAppMessage.ImageStyle InAppMessage.Orientation InAppMessage.TextAlignment InAppMessage.CropType InAppMessage.prototype.closeMessage InAppMessage.prototype.removeAllSubscriptions InAppMessage.prototype.removeSubscription InAppMessage.prototype.subscribeToClickedEvent InAppMessage.prototype.subscribeToDismissedEvent InAppMessage.fromJson FullScreenMessage ModalMessage HtmlMessage SlideUpMessage User User.Genders User.NotificationSubscriptionTypes User.prototype.addAlias User.prototype.addToCustomAttributeArray User.prototype.addToSubscriptionGroup User.prototype.getUserId User.prototype.incrementCustomUserAttribute User.prototype.removeFromCustomAttributeArray User.prototype.removeFromSubscriptionGroup User.prototype.setCountry User.prototype.setCustomLocationAttribute User.prototype.setCustomUserAttribute User.prototype.setDateOfBirth User.prototype.setEmail User.prototype.setEmailNotificationSubscriptionType User.prototype.setFirstName User.prototype.setGender User.prototype.setHomeCity User.prototype.setLanguage User.prototype.setLastKnownLocation User.prototype.setLastName User.prototype.setPhoneNumber User.prototype.setPushNotificationSubscriptionType InAppMessageButton InAppMessageButton.prototype.removeAllSubscriptions InAppMessageButton.prototype.removeSubscription InAppMessageButton.prototype.subscribeToClickedEvent automaticallyShowInAppMessages destroyFeed hideContentCards showContentCards showFeed showInAppMessage toggleContentCards toggleFeed changeUser destroy getDeviceId initialize isPushBlocked isPushPermissionGranted isPushSupported logCardClick logCardDismissal logCardImpressions logContentCardsDisplayed logCustomEvent logFeedDisplayed logInAppMessageButtonClick logInAppMessageClick logInAppMessageHtmlClick logInAppMessageImpression logPurchase openSession requestPushPermission removeAllSubscriptions removeSubscription requestContentCardsRefresh requestFeedRefresh requestImmediateDataFlush enableSDK isDisabled setLogger setSdkAuthenticationSignature addSdkMetadata disableSDK subscribeToContentCardsUpdates subscribeToFeedUpdates subscribeToInAppMessage subscribeToSdkAuthenticationFailures toggleLogging unregisterPush wipeData handleBrazeAction".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.braze,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.brazeQueue.push(arguments); return true}"))()}window.braze.getCachedContentCards=function(){return new window.braze.ContentCards};window.braze.getCachedFeed=function(){return new window.braze.Feed};window.braze.getUser=function(){return new window.braze.User};(y=p.createElement(P)).type='text/javascript';
-    y.src='https://js.appboycdn.com/web-sdk/4.0/braze.min.js';
-    y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
-  }(window,document,'script');
-  // initialize the SDK. Temporarily removing API key to Sweeney for Segment testing 919cad7b-0c69-43cb-9dd3-b6e99c16c57a and
-  // adding the key to 01.
-  braze.initialize('df1bcdb6-c9e3-431e-86e5-3fd1868546d7', {
-    baseUrl: "sdk.iad-01.braze.com",
-    enableLogging: true,
-    minimumIntervalBetweenTriggerActionsInSeconds: 0
-  });
-  // optionally show all in-app messages without custom handling 
-  braze.automaticallyShowInAppMessages();
-  // optionally set the current user's External ID
-
-  // I am commenting out the .changeUser method to try and be anonymous until I identify myself. 
-  /*if (isLoggedIn){
-    braze.changeUser('2813308004');
+/*  h1
+  {
+      -webkit-animation: color-change 1s infinite;
+      -moz-animation: color-change 1s infinite;
+      -o-animation: color-change 1s infinite;
+      -ms-animation: color-change 1s infinite;
+      animation: color-change 1s infinite;
   }*/
-  // braze.changeUser('2813308004');
-  // if you use Content Cards
-  braze.subscribeToContentCardsUpdates(function(cards){
-    // cards have been updated
-  });
-  // Be sure to call `openSession` after `automaticallyShowInAppMessages`
-  braze.openSession();
-  braze.requestPushPermission()
-    </script>
+
+  @-webkit-keyframes color-change
+  {
+      0% { color: red; }
+      20% { color: blue; }
+      40% { color: yellow; }
+      60% { color: orange; }
+      80% { color: green; }
+      100% { color: red; }
+  }
+  @-moz-keyframes color-change
+  {
+      0% { color: red; }
+      20% { color: blue; }
+      40% { color: yellow; }
+      60% { color: orange; }
+      80% { color: green; }
+      100% { color: red; }
+  }
+  @-ms-keyframes color-change
+  {
+      0% { color: red; }
+      20% { color: blue; }
+      40% { color: yellow; }
+      60% { color: orange; }
+      80% { color: green; }
+      100% { color: red; }
+  }
+  @-o-keyframes color-change
+  {
+      0% { color: red; }
+      20% { color: blue; }
+      40% { color: yellow; }
+      60% { color: orange; }
+      80% { color: green; }
+      100% { color: red; }
+  }
+  @keyframes color-change
+  {
+      0% { color: red; }
+      20% { color: blue; }
+      40% { color: yellow; }
+      60% { color: orange; }
+      80% { color: green; }
+      100% { color: red; }
+  }
+
+</style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="custom.css" />
+  <!-- You'll want to add the Appboy SDK here -->
+  <script type="text/javascript">
+    +function(a,p,P,b,y){a.braze={};a.brazeQueue=[];for(var s="BrazeSdkMetadata DeviceProperties Card Card.prototype.dismissCard Card.prototype.removeAllSubscriptions Card.prototype.removeSubscription Card.prototype.subscribeToClickedEvent Card.prototype.subscribeToDismissedEvent Card.fromContentCardsJson Banner CaptionedImage ClassicCard ControlCard ContentCards ContentCards.prototype.getUnviewedCardCount Feed Feed.prototype.getUnreadCardCount ControlMessage InAppMessage InAppMessage.SlideFrom InAppMessage.ClickAction InAppMessage.DismissType InAppMessage.OpenTarget InAppMessage.ImageStyle InAppMessage.Orientation InAppMessage.TextAlignment InAppMessage.CropType InAppMessage.prototype.closeMessage InAppMessage.prototype.removeAllSubscriptions InAppMessage.prototype.removeSubscription InAppMessage.prototype.subscribeToClickedEvent InAppMessage.prototype.subscribeToDismissedEvent InAppMessage.fromJson FullScreenMessage ModalMessage HtmlMessage SlideUpMessage User User.Genders User.NotificationSubscriptionTypes User.prototype.addAlias User.prototype.addToCustomAttributeArray User.prototype.addToSubscriptionGroup User.prototype.getUserId User.prototype.incrementCustomUserAttribute User.prototype.removeFromCustomAttributeArray User.prototype.removeFromSubscriptionGroup User.prototype.setCountry User.prototype.setCustomLocationAttribute User.prototype.setCustomUserAttribute User.prototype.setDateOfBirth User.prototype.setEmail User.prototype.setEmailNotificationSubscriptionType User.prototype.setFirstName User.prototype.setGender User.prototype.setHomeCity User.prototype.setLanguage User.prototype.setLastKnownLocation User.prototype.setLastName User.prototype.setPhoneNumber User.prototype.setPushNotificationSubscriptionType InAppMessageButton InAppMessageButton.prototype.removeAllSubscriptions InAppMessageButton.prototype.removeSubscription InAppMessageButton.prototype.subscribeToClickedEvent automaticallyShowInAppMessages destroyFeed hideContentCards showContentCards showFeed showInAppMessage toggleContentCards toggleFeed changeUser destroy getDeviceId initialize isPushBlocked isPushPermissionGranted isPushSupported logCardClick logCardDismissal logCardImpressions logContentCardsDisplayed logCustomEvent logFeedDisplayed logInAppMessageButtonClick logInAppMessageClick logInAppMessageHtmlClick logInAppMessageImpression logPurchase openSession requestPushPermission removeAllSubscriptions removeSubscription requestContentCardsRefresh requestFeedRefresh requestImmediateDataFlush enableSDK isDisabled setLogger setSdkAuthenticationSignature addSdkMetadata disableSDK subscribeToContentCardsUpdates subscribeToFeedUpdates subscribeToInAppMessage subscribeToSdkAuthenticationFailures toggleLogging unregisterPush wipeData handleBrazeAction".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.braze,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.brazeQueue.push(arguments); return true}"))()}window.braze.getCachedContentCards=function(){return new window.braze.ContentCards};window.braze.getCachedFeed=function(){return new window.braze.Feed};window.braze.getUser=function(){return new window.braze.User};(y=p.createElement(P)).type='text/javascript';
+      y.src='https://js.appboycdn.com/web-sdk/4.0/braze.min.js';
+      y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
+    }(window,document,'script');
+
+    // initialize the SDK
+    braze.initialize('919cad7b-0c69-43cb-9dd3-b6e99c16c57a', {
+      baseUrl: "sondheim.braze.com",
+      allowUserSuppliedJavascript: true,
+      enableLogging: true
+    });
+
+    // optionally show all in-app messages without custom handling
+    braze.automaticallyShowInAppMessages();
+
+    // optionally set the current user's External ID
+    if (isLoggedIn){
+        braze.changeUser(userIdentifier);
+    }
+    // if you use Content Cards
+    braze.subscribeToContentCardsUpdates(function(cards){
+      // cards have been updated
+    });
+    
+    // Be sure to call `openSession` after `automaticallyShowInAppMessages`
+    braze.openSession();
+  </script>  
 </head>
 
 <body>
-<nav>
-    <h3>Your Personalized Feed</h3>
-    <div id="feed"></div>
-</nav>
 
-<!-- This is adding the test button for the priority testing -->
+  <h1>Braze Web SDK Tutorial Site</h1>
+  <h3>In Progress</h3>
 
-<nav>
-  <h3>Prioritized Feed</h3>
-  <div id="prioritized_feed"></div>
-</nav>
-<button id="low_priority_cards_toggle" type="button">Show all cards with a priority</button>
-<button id="medium_priority_cards_toggle" type="button">Show medium priority cards</button>
-<button id="high_priority_cards_toggle" type="button">Show high priority cards</button>
+  <br />
 
-<!-- This ends the test button for priority testing -->
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Read Me!
+  </button>
 
-<button id="toggle" type="button">Toggle Cards Feed</button>
-<button id="hide" type="button">Hide Cards Feed</button>
-<button id="show" type="button">Show Cards Feed</button>
-<script>
-   const toggle = document.getElementById("toggle");
-   const hide = document.getElementById("hide");
-   const show = document.getElementById("show");
-   const feed = document.getElementById("feed");
-   // This is the const value for the prioritized_cards button
-   const low_priority_cards_toggle = document.getElementById("low_priority_cards_toggle");
-   const medium_priority_cards_toggle = document.getElementById("medium_priority_cards_toggle");
-   const high_priority_cards_toggle = document.getElementById("high_priority_cards_toggle");
+  <br />
+  <br />
 
+  <a href="https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html" target="_blank">Link to Web SDK Documentation (Main Class Methods)</a>
 
-   toggle.onclick = function(){
-      braze.toggleContentCards(feed);
-   }
+  <br />
+  <br />
 
-   hide.onclick = function(){
-      braze.hideContentCards();
-   }
+  <a href="https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html" target="_blank">Link to Web SDK Documentation (getUser() Subclass Methods)</a>
 
-   show.onclick = function(){
-      braze.showContentCards(feed);
-   }
+  <br />
+  <br />
 
-   // I'm adding some code to filter by feed type. The idea is to test with sorting methods. This test will be with the KVP 'low_priority'
-   // ... states that you are passing an array and pluralization indicates you are going to have multiple values in the array of that name
-   function showCardsByFeedType(...priority_levels) {
-  braze.showContentCards(null, function(cards) {
-    const filteredCards = cards.filter(function(card) {
-      // .includes is a true or false check. So if priority_level exists, return true
-      return priority_levels.includes(card.extras["priority_level"]);
-    });
-    filteredCards.sort(function(a,b) {
-      const priorityA = a.extras.priority_level;
-      const priorityB = b.extras.priority_level;
-      if (priorityA < priorityB) {
-        return -1;
-      }
-      if (priorityA > priorityB) {
-        return 1;
-      }
-      return 0;
-    })
-    return filteredCards
-  })
-}
+  <a href="https://sweeney.braze.com/users/user_search/5cf92ce4fbe76a0c3c861e6a" target="_blank">Link to Braze Dashboard</a>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hey There!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Welcome to my Braze Web SDK Integration Tutorial.
+          <br />
+          <br />
+          –Get started by integrating methods into the JavaScript file in this folder titled script.js (PAY CLOSE ATTENTION TO THE COMMENTS).
+          <br />
+          <br />
+          -If you get stuck, there is an answer key file in the folder.
+          <br />
+          <br />
+          –The documentation for the methods, as well as the real-time user search dashboard, are linked on this page.
+          <br />
+          <br />
+          –When using the actual HTML site, make sure to submit a User ID (inside user attributes) before you do anything else!
 
 
-// This is adding the actual button for the priority testing
-
-document.getElementById("low_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("1", "2", "3");
-};
-document.getElementById("medium_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("2");
-};
-document.getElementById("high_priority_cards_toggle").onclick = function() {
-  showCardsByFeedType("3", "2");
-};
 
 
-// This is the end of the actual button for the priority testing. 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</script>
-<h1>Test questions for user updates</h1>
-<form name="travel" onsubmit="identify(event)">
-     What is your favorite destination?
-    <input name="destination" size="81" type="text"/>
-    <br><br>
-    Any recommendations (cool things to do, places to visit or restaurants to eat)?
-    <br><br>
-    <textarea cols="81" name="details" rows="3">
-    </textarea>
-    <br><br>
-    First Name: <input name="firstname" size="75" type="text"/>
-    <br><br>
-    Last Name: <input name="lastname" size="75" type="text"/>
-    <br><br>
-    Email: <input name="email" size="75" type="text"/>
-    <br><br>
-    Number: <input name="number" size="75" type="number"/>
-    <br><br>
-    Preference: <input name="preference" size="75" type="text"/>
-    <br><br>
-    external_id (optional): <input name="external_id" size="75" type="text"/>
-    <br><br>
-    <input name="Submit Form" type="submit" value="submit"/>
-</form>
+  <br />
+  <br />
 
-    <!--Placeholder for identify and track script. I also expanded e to event. -->
-    <script type="text/javascript">
-      function identify(event){
-        event.preventDefault();
-        var form = event.target;
-        var email = form["email"].value;
-        var firstname = form["firstname"].value;
-        var lastname = form["lastname"].value;
-        var destination = form["destination"].value;
-        var number = form["number"].value;
-        var details = form["details"].value;
-        var preference = form["preference"].value;
-        var external_id = form["external_id"].value;
-        var user = {
-            email: email,
-            firstname: firstname,
-            lastname: lastname,
-            destination: destination,
-            details: details,
-            number: number
-        };
-        alert("The form was submitted");
-        braze.changeUser(external_id);
-        braze.logCustomEvent('Form Submitted', {'marcoTestKey': true});
-        braze.getUser().setFirstName(firstname);
-        braze.getUser().setLastName(lastname);
-        braze.getUser().setPhoneNumber(number);
-        braze.getUser().setEmail(email);
-        braze.getUser().setCustomUserAttribute('fav_destination',destination);
-        braze.getUser().setCustomUserAttribute('recommendations',details);
-        braze.getUser().addToCustomAttributeArray('preference', preference);
-        window.location.reload();
-      /*analytics.identify('test_user_id', {
-          email: email,
-          fullname: fullname,
-      });*/
-      //analytics.track('Form Submitted', user);
-      //analytics.track('Number Submitted', contactInfo);
-      }
-    </script>
-    <br>
+  <button class="specialButton" onclick="user()">Set User Attributes</button>
+  <br />
+  <br />
 
-    <button class="btn btn-primary" onclick="
-      braze.logCustomEvent('Button Clicked', {
-        'button_clicked': true
-      });
-      braze.getUser().setCustomUserAttribute(
-        'trait1',
-        'true'
-          );
-      "> Track: Button Clicked<span id="collapseExample" class="collapse" style="font-size: 0.85em;"><br></span></button>
-      <br><br>
+  <div id="user" style="display:none">
 
-      <button id="scriptExample" class="ab-message-button" type="button" style="background-color: rgb(27, 120, 207);">
-          <span style="color: rgb(255, 255, 255);">New Button!</span>
-      </button>
-            <script>
-              document.querySelector("#scriptExample").onclick = function(){
-                braze.getUser().setCustomUserAttribute("new_button", "yas");
-                braze.logCustomEvent("new_button_event");
-              };
-            </script>
+    User ID:
+    <input id="change_user_text" type="text" name="userid">
+    <button id="change_user_button">Submit</button><br />
+    <br />
+
+    First Name:
+    <input id="fn_text" type="text" name="firstname">
+    <button id="fn_button">Submit</button><br />
+    <br />
+
+    Last Name:
+    <input id="ln_text" type="text" name="lastname">
+    <button id="ln_button">Submit</button><br />
+    <br />
+
+    Email Address:
+    <input id="email_text" type="email" name="emailaddress">
+    <button id="email_button">Submit</button><br />
+    <br />
+
+    Gender:
+    <select id="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+      <option value="unknown">Unknown</option>
+      <option value="not applicable">Not Applicable</option>
+      <option value="prefer not to answer">Prefer Not To Answer</option>
+    </select>
+    <button id="gender_button">Submit</button><br />
+    <br />
+
+    Birthday:
+    <input id="birthday" type="date" name="birthday">
+    <button id="birthday_button">Submit</button><br />
+    <br />
+
+    Country:
+    <input id="country_text" type="text" name="country">
+    <button id="country_button">Submit</button><br />
+    <br />
+
+    Home City:
+    <input id="home_city_text" type="text" name="homecity">
+    <button id="home_city_button">Submit</button><br />
+    <br />
+
+    Phone Number:
+    <input id="phone_number_text" type="text" name="phonenumber">
+    <button id="phone_number_button">Submit</button><br />
+    <br />
+
+  </div>
+
+  <button class="specialButton" onclick="customA()">Set Custom Attributes</button>
+  <br />
+  <br />
+
+  <div id="customA" style="display:none">
+
+    Attribute Name:
+    <input id="attribute_name" type="text" name="attributename"><br />
+    <br />
+
+    Attribute Value:
+    <input id="attribute_value" type="text" name="attributevalue"><br />
+    <br />
+
+    <button id="attribute_button">Submit</button><br />
+    <br />
+
+  </div>
+
+  <button class="specialButton" onclick="customE()">Log Custom Events</button>
+  <br />
+  <br />
+
+  <div id="customE" style="display:none">
+
+    Event Name:
+    <input id="event_name" type="text" name="eventname"><br />
+    <br />
+
+    [Optional] Event Properties (JSON):
+    <input id="properties" type="text" name="optionaleventproperties"><br />
+    <br />
+
+    <button id="event_button">Submit</button><br />
+    <br />
+
+  </div>
+
+  <button class="specialButton" onclick="purchases()">Log Purchases</button>
+  <br />
+
+  <div id="purchases" style="display:none">
+
+    <br />
+    Product ID:
+    <input id="product_id" type="text" name="productid"><br />
+    <br />
+
+    [Optional] Currency:
+    <input id="currency" type="text" name="currency"><br />
+    <br />
+
+    Price:
+    <input id="price" type="number" name="price"><br />
+    <br />
+
+    [Optional] Quantity:
+    <input id="quantity" type="number" name="quantity"><br />
+    <br />
+
+    <button id="log_purchase_button">Submit</button><br />
+    <br />
+
+  </div>
+
+  <!--
+<h2 style="color:green;">Push</h2>
+
+  <button id="register">Register for Push</button>
+  <button id="unregister">Unregister for Push</button>
+  <br />
+  <br />
+ -->
+
+  <br />
+  <button id="test_button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">
+    Test It!
+  </button>
+
+  <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="testModalLabel">User Attribute Results</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h2 id="answer"></h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+<script type="text/javascript" src="script.js"></script>
+<script>
+  $('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').trigger('focus')
+  })
+</script>
+
 </html>
