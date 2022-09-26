@@ -113,17 +113,19 @@
     // Be sure to call `openSession` after `automaticallyShowInAppMessages`
     braze.openSession();
 
-    //check for Navigation Timing API support
-    if (window.performance) {
-      console.info("window.performance works fine on this browser");
-    }
-    console.info(performance.navigation.type);
+    const pageAccessedByReload = (
+      (window.performance.navigation && window.performance.navigation.type === 1) ||
+        window.performance
+          .getEntriesByType('navigation')
+          .map((nav) => nav.type)
+          .includes('reload')
+    );
     
-    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-      console.info( "This page is reloaded" );
-    } else {
-      console.info( "This page is not reloaded");
+    if (pageAccessedByReload = true) {
+      braze.openSession();
     }
+
+    alert(pageAccessedByReload);
   </script>  
 </head>
 
